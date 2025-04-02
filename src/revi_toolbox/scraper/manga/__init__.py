@@ -1,0 +1,1 @@
+from revi_toolbox.scraper.manga.runner.mangabats import MangabatsScraperRunner
