@@ -2,7 +2,7 @@ from pydantic import SecretStr
 from pymongo import MongoClient
 from pymongo.collection import Collection
 
-from revi_toolbox.mongo.schema import MongoAuth
+from revi_toolbox.adapters.mongo.schema import MongoAuth
 
 
 class MongoAdapter:
