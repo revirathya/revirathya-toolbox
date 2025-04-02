@@ -1,1 +1,0 @@
-from revi_toolbox.log.adapter import LogAdapter
