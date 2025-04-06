@@ -34,7 +34,7 @@ class PostgreAdapter:
         # Run Query
         if (params is None): 
             cursor.execute(query)
-        elif isinstance(params, List[dict]):
+        elif isinstance(params, list):
             cursor.executemany(query, params)
         else:
             cursor.execute(query, params)
