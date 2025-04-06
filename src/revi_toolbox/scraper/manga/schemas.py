@@ -7,7 +7,7 @@ from pydantic import BaseModel
 class MangaOverview(BaseModel):
     code: str
     title: str
-    author: List[str]
+    authors: List[str]
     genres: List[str]
     total_chapters: int
     total_views: int
