@@ -1,4 +1,4 @@
- FROM python:3.12
+FROM python:3.12
 
 # Add uv Modules
 COPY --from=ghcr.io/astral-sh/uv:0.6.7 /uv /uvx /bin/

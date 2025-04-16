@@ -11,7 +11,7 @@ class MangaOverview(BaseModel):
     genres: List[str]
     total_chapters: int
     total_views: int
-    is_complete: bool
+    is_completed: bool
     last_updated: datetime
 
 

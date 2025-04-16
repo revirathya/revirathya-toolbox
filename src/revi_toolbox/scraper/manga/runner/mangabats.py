@@ -97,7 +97,7 @@ class MangabatsScraperRunner:
             total_views = int(
                 str(total_views.text).replace("View : ", "").replace(",", "")
             ),
-            is_complete = (status.text == "Status : Completed"),
+            is_completed = (status.text == "Status : Completed"),
             last_updated = datetime.strptime(
                 str(last_updated.text).replace("Last updated : ", ""),
                 "%b-%d-%Y %H:%M:%S %p"
