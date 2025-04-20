@@ -1,3 +1,4 @@
+import re
 from typing import List, Union
 
 import psycopg2
@@ -35,7 +36,8 @@ class PostgreAdapter:
         if (params is None): 
             cursor.execute(query)
         elif isinstance(params, list):
-            cursor.executemany(query, params)
+            __query = self.__reparse_query_many(cursor, query, params)
+            cursor.execute(__query)
         else:
             cursor.execute(query, params)
         conn.commit()
@@ -50,3 +52,16 @@ class PostgreAdapter:
         finally:
             conn.close()
         return results
+
+
+    # Private
+    def __reparse_query_many(self, cursor: DictCursor, query: str, params: List[dict]) -> str:
+        values_params = re.findall(r"(?<=VALUES )[^;\n]+", query)
+        __query = query
+        if (values_params):
+            value_inj = ", ".join(
+                cursor.mogrify(values_params[0], p).decode("utf-8")
+                for p in params
+            )
+            __query = re.sub(r"(?<=VALUES )[^;\n]+", value_inj, query)
+        return __query
