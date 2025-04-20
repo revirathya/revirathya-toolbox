@@ -78,7 +78,7 @@ class MangabatsScraperRunner:
         # Parse - Info Section
         info_rows = etree_xpath(page, "//ul[@class='manga-info-text']/li")
         title = etree_xpath_first(info_rows[0], "./h1")
-        author = etree_xpath(info_rows[1], "./a")
+        authors = etree_xpath(info_rows[1], "./a")
         status = info_rows[2]
         last_updated = info_rows[3]
         total_views = info_rows[5]
@@ -91,13 +91,13 @@ class MangabatsScraperRunner:
         mo = MangaOverview(
             code = slug,
             title = title.text,
-            author = [clean_str(a.text) for a in author],
+            authors = [clean_str(a.text) for a in authors],
             genres = [clean_str(g.text) for g in genres],
             total_chapters = len(chapter_list),
             total_views = int(
                 str(total_views.text).replace("View : ", "").replace(",", "")
             ),
-            is_complete = (status.text == "Status : Completed"),
+            is_completed = (status.text == "Status : Completed"),
             last_updated = datetime.strptime(
                 str(last_updated.text).replace("Last updated : ", ""),
                 "%b-%d-%Y %H:%M:%S %p"
